@@ -1,5 +1,6 @@
 package com.jhonatan.junitapp.ejemplo.models;
 
+import com.jhonatan.junitapp.ejemplo.exceptions.DineroInsuficienteException;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -61,4 +62,12 @@ class CuentaTest {
         assertEquals("1100.12345", cuenta.getSaldo().toPlainString());
     }
 
+    @Test
+    void testDineroInsufienteException() {
+        Cuenta cuenta = new Cuenta("JhonSai", new BigDecimal("1000.12345"));
+        DineroInsuficienteException dineroInsuficienteException = assertThrows(DineroInsuficienteException.class, () -> {
+            cuenta.debito(new BigDecimal(1400));
+        });
+        assertEquals("Dinero Insuficiente", dineroInsuficienteException.getMessage());
+    }
 }

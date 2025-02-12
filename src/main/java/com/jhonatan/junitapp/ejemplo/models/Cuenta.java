@@ -1,5 +1,7 @@
 package com.jhonatan.junitapp.ejemplo.models;
 
+import com.jhonatan.junitapp.ejemplo.exceptions.DineroInsuficienteException;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -28,8 +30,13 @@ public class Cuenta {
         this.saldo = saldo;
     }
 
-    public void debito(BigDecimal valor) {
-        this.saldo = saldo.subtract(valor);
+    public void debito(BigDecimal valor) throws DineroInsuficienteException {
+        BigDecimal nuevoSaldo = this.saldo.subtract(valor);
+        //no hay suficiente dinero y se lanza el error.
+        if (nuevoSaldo.compareTo(BigDecimal.ZERO) < 0) {
+            throw new DineroInsuficienteException("Dinero Insuficiente");
+        }
+        this.saldo = nuevoSaldo;
     }
 
     public void credito(BigDecimal valor) {
