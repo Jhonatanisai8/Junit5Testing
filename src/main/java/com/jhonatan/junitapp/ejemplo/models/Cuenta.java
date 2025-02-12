@@ -8,6 +8,7 @@ import java.util.Objects;
 public class Cuenta {
     private String propietario;
     private BigDecimal saldo;
+    private Banco banco;
 
     public Cuenta(String propietario, BigDecimal saldo) {
         this.propietario = propietario;
@@ -37,6 +38,14 @@ public class Cuenta {
             throw new DineroInsuficienteException("Dinero Insuficiente");
         }
         this.saldo = nuevoSaldo;
+    }
+
+    public Banco getBanco() {
+        return banco;
+    }
+
+    public void setBanco(Banco banco) {
+        this.banco = banco;
     }
 
     public void credito(BigDecimal valor) {

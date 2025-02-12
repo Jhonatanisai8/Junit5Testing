@@ -70,4 +70,32 @@ class CuentaTest {
         });
         assertEquals("Dinero Insuficiente", dineroInsuficienteException.getMessage());
     }
+
+    @Test
+    void testTransferirDineroCuentas() {
+        Cuenta cuenta01 = new Cuenta("JhonSai", new BigDecimal("3000"));
+        Cuenta cuenta02 = new Cuenta("JhonDa", new BigDecimal("1000.8989"));
+        Banco banco = new Banco();
+        banco.setNombre("Banco Nacional");
+        banco.transferir(cuenta02, cuenta01, new BigDecimal(500));
+        assertEquals("500.8989", cuenta02.getSaldo().toString());
+    }
+
+    @Test
+    void testRelacionBancoCuentas() {
+        Cuenta cuenta01 = new Cuenta("JhonSai", new BigDecimal("3000"));
+        Cuenta cuenta02 = new Cuenta("JhonDa", new BigDecimal("1000.8989"));
+        Banco banco = new Banco();
+        banco.setNombre("Banco Nacional");
+
+        banco.addCuenta(cuenta01);
+        banco.addCuenta(cuenta02);
+
+        banco.transferir(cuenta02, cuenta01, new BigDecimal(500));
+        assertEquals("500.8989", cuenta02.getSaldo().toString());
+
+        assertEquals(2, banco.getCuentas().size());
+    }
+
+
 }
