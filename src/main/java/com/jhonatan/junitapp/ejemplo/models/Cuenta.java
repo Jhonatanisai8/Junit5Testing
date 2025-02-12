@@ -1,6 +1,7 @@
 package com.jhonatan.junitapp.ejemplo.models;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class Cuenta {
     private String propietario;
@@ -25,5 +26,16 @@ public class Cuenta {
 
     public void setSaldo(BigDecimal saldo) {
         this.saldo = saldo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Cuenta cuenta)) return false;
+        return Objects.equals(propietario, cuenta.propietario) && Objects.equals(saldo, cuenta.saldo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(propietario, saldo);
     }
 }

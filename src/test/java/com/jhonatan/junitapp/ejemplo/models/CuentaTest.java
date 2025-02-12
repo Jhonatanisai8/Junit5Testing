@@ -30,4 +30,13 @@ class CuentaTest {
         assertFalse(numero < 0); //si es mayor el numero a cero el saldo es negativo
         assertTrue(numero > 0);//si es mayor que 0, el saldo es positivo
     }
+
+    @Test
+    void testReferenciaCuenta() {
+        Cuenta cuenta02 = new Cuenta("JhonSai", new BigDecimal("1000.12345"));
+        Cuenta cuenta01 = new Cuenta("JhonSai", new BigDecimal("1000.12345"));
+
+        //assertNotEquals(cuenta01, cuenta02);
+        assertEquals(cuenta01, cuenta02);
+    }
 }
