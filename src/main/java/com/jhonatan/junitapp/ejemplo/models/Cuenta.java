@@ -6,6 +6,11 @@ public class Cuenta {
     private String propietario;
     private BigDecimal saldo;
 
+    public Cuenta(String propietario, BigDecimal saldo) {
+        this.propietario = propietario;
+        this.saldo = saldo;
+    }
+
     public String getPropietario() {
         return propietario;
     }
