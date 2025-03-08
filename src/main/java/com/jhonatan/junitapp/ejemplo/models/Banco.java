@@ -35,5 +35,6 @@ public class Banco {
 
     public void addCuenta(Cuenta c) {
         this.cuentas.add(c);
+        c.setBanco(this);
     }
 }
