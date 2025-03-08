@@ -92,6 +92,7 @@ class CuentaTest {
         banco.addCuenta(cuenta02);
 
         banco.transferir(cuenta02, cuenta01, new BigDecimal(500));
+        assertEquals("3500", cuenta01.getSaldo().toString());
         assertEquals("500.8989", cuenta02.getSaldo().toString());
 
         assertEquals(2, banco.getCuentas().size());
