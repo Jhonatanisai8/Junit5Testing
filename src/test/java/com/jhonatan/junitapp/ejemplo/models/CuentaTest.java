@@ -97,6 +97,13 @@ class CuentaTest {
 
         assertEquals(2, banco.getCuentas().size());
         assertEquals("Banco Nacional", cuenta01.getBanco().getNombre());
+        //buscamos una cuenta por el nombre con el api stream
+        assertEquals("JhonSai", banco.getCuentas()
+                .stream()
+                .filter(cuenta -> cuenta.getPropietario().equals("JhonSai"))
+                .findFirst()
+                .get()
+                .getPropietario());
     }
 
 
