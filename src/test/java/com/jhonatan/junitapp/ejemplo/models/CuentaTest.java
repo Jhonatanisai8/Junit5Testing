@@ -112,6 +112,12 @@ class CuentaTest {
                 .findFirst()
                 .isPresent());
 
+        //con anyMatch
+        assertTrue(banco.getCuentas()
+                .stream()
+                .anyMatch(cuenta ->
+                        cuenta.getPropietario().equals("JhonSai")));
+
     }
 
 
