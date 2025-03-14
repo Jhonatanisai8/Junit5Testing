@@ -19,9 +19,9 @@ class CuentaTest {
         //cuenta.setPropietario("JhonSai");
         String esperado = "JhonSai";
         String actual = cuenta.getPropietario();
-        assertNotNull(actual);
+        assertNotNull(actual, () -> "La cuenta no debe ser nula.");
 
-        assertEquals(esperado, actual);
+        assertEquals(esperado, actual, () -> "La propietario no debe ser igual a " + esperado);
         assertTrue(esperado.equals(actual));
     }
 
