@@ -92,33 +92,34 @@ class CuentaTest {
         banco.addCuenta(cuenta02);
 
         banco.transferir(cuenta02, cuenta01, new BigDecimal(500));
-        assertEquals("3500", cuenta01.getSaldo().toPlainString());
-        assertEquals("500.8989", cuenta02.getSaldo().toString());
 
-        assertEquals(2, banco.getCuentas().size());
-        assertEquals("Banco Nacional", cuenta01.getBanco().getNombre());
-        //buscamos una cuenta por el nombre con el api stream
-        assertEquals("JhonSai", banco.getCuentas()
-                .stream()
-                .filter(cuenta -> cuenta.getPropietario().equals("JhonSai"))
-                .findFirst()
-                .get()
-                .getPropietario());
-
-        // con isPresent
-        assertTrue(banco.getCuentas()
-                .stream()
-                .filter(cuenta -> cuenta.getPropietario().equals("JhonSai"))
-                .findFirst()
-                .isPresent());
-
-        //con anyMatch
-        assertTrue(banco.getCuentas()
-                .stream()
-                .anyMatch(cuenta ->
-                        cuenta.getPropietario().equals("JhonSai")));
-
+        assertAll(() -> {
+            assertEquals("3510", cuenta01.getSaldo().toPlainString());
+        }, () -> {
+            assertEquals("500.8989", cuenta02.getSaldo().toString());
+        }, () -> {
+            assertEquals(2, banco.getCuentas().size());
+        }, () -> {
+            assertEquals("Banco Nacional.", cuenta01.getBanco().getNombre());
+        }, () -> {        //buscamos una cuenta por el nombre con el api stream
+            assertEquals("JhonSai", banco.getCuentas()
+                    .stream()
+                    .filter(cuenta -> cuenta.getPropietario().equals("JhonSai"))
+                    .findFirst()
+                    .get()
+                    .getPropietario());
+        }, () -> {// con isPresent
+            assertTrue(banco.getCuentas()
+                    .stream()
+                    .filter(cuenta -> cuenta.getPropietario().equals("JhonSai"))
+                    .findFirst()
+                    .isPresent());
+        }, () -> {//con anyMatch
+            assertTrue(banco.getCuentas()
+                    .stream()
+                    .anyMatch(cuenta ->
+                            cuenta.getPropietario().equals("JhonSai")));
+        });
     }
-
 
 }
